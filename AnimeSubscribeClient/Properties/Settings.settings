@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AnimeSubscribeClient.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FirstRun" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Token" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DownHost" Type="System.String" Scope="User">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="DownPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9123</Value>
+    </Setting>
+    <Setting Name="DownUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)">qbittorrent</Value>
+    </Setting>
+    <Setting Name="DownPass" Type="System.String" Scope="User">
+      <Value Profile="(Default)">qbittorrent</Value>
+    </Setting>
+    <Setting Name="ServerAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">serverip:port</Value>
+    </Setting>
+    <Setting Name="DownPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
