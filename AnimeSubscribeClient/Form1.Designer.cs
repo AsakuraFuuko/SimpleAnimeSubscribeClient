@@ -31,31 +31,32 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtServerToken = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtServerAddress = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBrowserDownloadPath = new System.Windows.Forms.Button();
+            this.txtDownToolPath = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtDownToolPass = new System.Windows.Forms.TextBox();
+            this.txtDownToolUser = new System.Windows.Forms.TextBox();
+            this.txtDownToolPort = new System.Windows.Forms.TextBox();
+            this.txtDownToolHost = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cbDownTool = new System.Windows.Forms.ComboBox();
             this.fbdDownloadPath = new System.Windows.Forms.FolderBrowserDialog();
-            this.txtDownToolPath = new System.Windows.Forms.TextBox();
-            this.txtDownToolPass = new System.Windows.Forms.TextBox();
-            this.txtDownToolUser = new System.Windows.Forms.TextBox();
-            this.txtDownToolPort = new System.Windows.Forms.TextBox();
-            this.txtDownToolHost = new System.Windows.Forms.TextBox();
-            this.txtServerToken = new System.Windows.Forms.TextBox();
-            this.txtServerAddress = new System.Windows.Forms.TextBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mQuit = new System.Windows.Forms.ToolStripMenuItem();
             this.mShowOrHide = new System.Windows.Forms.ToolStripMenuItem();
+            this.mQuit = new System.Windows.Forms.ToolStripMenuItem();
             this.btnStop = new System.Windows.Forms.Button();
             this.lbStatus = new System.Windows.Forms.Label();
+            this.chkStartup = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -74,6 +75,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "服务器信息";
             // 
+            // txtServerToken
+            // 
+            this.txtServerToken.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "Token", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtServerToken.Location = new System.Drawing.Point(53, 65);
+            this.txtServerToken.Name = "txtServerToken";
+            this.txtServerToken.PasswordChar = '*';
+            this.txtServerToken.Size = new System.Drawing.Size(141, 21);
+            this.txtServerToken.TabIndex = 4;
+            this.txtServerToken.Text = global::AnimeSubscribeClient.Properties.Settings.Default.Token;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -82,6 +93,15 @@
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 3;
             this.label2.Text = "Token";
+            // 
+            // txtServerAddress
+            // 
+            this.txtServerAddress.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "ServerAddress", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtServerAddress.Location = new System.Drawing.Point(53, 26);
+            this.txtServerAddress.Name = "txtServerAddress";
+            this.txtServerAddress.Size = new System.Drawing.Size(141, 21);
+            this.txtServerAddress.TabIndex = 2;
+            this.txtServerAddress.Text = global::AnimeSubscribeClient.Properties.Settings.Default.ServerAddress;
             // 
             // label1
             // 
@@ -133,6 +153,15 @@
             this.btnBrowserDownloadPath.UseVisualStyleBackColor = true;
             this.btnBrowserDownloadPath.Click += new System.EventHandler(this.btnBrowserDownloadPath_Click);
             // 
+            // txtDownToolPath
+            // 
+            this.txtDownToolPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "DownPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtDownToolPath.Location = new System.Drawing.Point(65, 201);
+            this.txtDownToolPath.Name = "txtDownToolPath";
+            this.txtDownToolPath.Size = new System.Drawing.Size(106, 21);
+            this.txtDownToolPath.TabIndex = 12;
+            this.txtDownToolPath.Text = global::AnimeSubscribeClient.Properties.Settings.Default.DownPath;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -141,6 +170,43 @@
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 11;
             this.label7.Text = "下载路径";
+            // 
+            // txtDownToolPass
+            // 
+            this.txtDownToolPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "DownPass", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtDownToolPass.Location = new System.Drawing.Point(65, 163);
+            this.txtDownToolPass.Name = "txtDownToolPass";
+            this.txtDownToolPass.PasswordChar = '*';
+            this.txtDownToolPass.Size = new System.Drawing.Size(129, 21);
+            this.txtDownToolPass.TabIndex = 10;
+            this.txtDownToolPass.Text = global::AnimeSubscribeClient.Properties.Settings.Default.DownPass;
+            // 
+            // txtDownToolUser
+            // 
+            this.txtDownToolUser.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "DownUser", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtDownToolUser.Location = new System.Drawing.Point(65, 127);
+            this.txtDownToolUser.Name = "txtDownToolUser";
+            this.txtDownToolUser.Size = new System.Drawing.Size(129, 21);
+            this.txtDownToolUser.TabIndex = 9;
+            this.txtDownToolUser.Text = global::AnimeSubscribeClient.Properties.Settings.Default.DownUser;
+            // 
+            // txtDownToolPort
+            // 
+            this.txtDownToolPort.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "DownPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtDownToolPort.Location = new System.Drawing.Point(65, 91);
+            this.txtDownToolPort.Name = "txtDownToolPort";
+            this.txtDownToolPort.Size = new System.Drawing.Size(129, 21);
+            this.txtDownToolPort.TabIndex = 8;
+            this.txtDownToolPort.Text = global::AnimeSubscribeClient.Properties.Settings.Default.DownPort;
+            // 
+            // txtDownToolHost
+            // 
+            this.txtDownToolHost.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "DownHost", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtDownToolHost.Location = new System.Drawing.Point(65, 55);
+            this.txtDownToolHost.Name = "txtDownToolHost";
+            this.txtDownToolHost.Size = new System.Drawing.Size(129, 21);
+            this.txtDownToolHost.TabIndex = 7;
+            this.txtDownToolHost.Text = global::AnimeSubscribeClient.Properties.Settings.Default.DownHost;
             // 
             // label6
             // 
@@ -189,71 +255,6 @@
             this.cbDownTool.Size = new System.Drawing.Size(186, 20);
             this.cbDownTool.TabIndex = 2;
             // 
-            // txtDownToolPath
-            // 
-            this.txtDownToolPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "DownPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtDownToolPath.Location = new System.Drawing.Point(65, 201);
-            this.txtDownToolPath.Name = "txtDownToolPath";
-            this.txtDownToolPath.Size = new System.Drawing.Size(106, 21);
-            this.txtDownToolPath.TabIndex = 12;
-            this.txtDownToolPath.Text = global::AnimeSubscribeClient.Properties.Settings.Default.DownPath;
-            // 
-            // txtDownToolPass
-            // 
-            this.txtDownToolPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "DownPass", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtDownToolPass.Location = new System.Drawing.Point(65, 163);
-            this.txtDownToolPass.Name = "txtDownToolPass";
-            this.txtDownToolPass.PasswordChar = '*';
-            this.txtDownToolPass.Size = new System.Drawing.Size(129, 21);
-            this.txtDownToolPass.TabIndex = 10;
-            this.txtDownToolPass.Text = global::AnimeSubscribeClient.Properties.Settings.Default.DownPass;
-            // 
-            // txtDownToolUser
-            // 
-            this.txtDownToolUser.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "DownUser", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtDownToolUser.Location = new System.Drawing.Point(65, 127);
-            this.txtDownToolUser.Name = "txtDownToolUser";
-            this.txtDownToolUser.Size = new System.Drawing.Size(129, 21);
-            this.txtDownToolUser.TabIndex = 9;
-            this.txtDownToolUser.Text = global::AnimeSubscribeClient.Properties.Settings.Default.DownUser;
-            // 
-            // txtDownToolPort
-            // 
-            this.txtDownToolPort.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "DownPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtDownToolPort.Location = new System.Drawing.Point(65, 91);
-            this.txtDownToolPort.Name = "txtDownToolPort";
-            this.txtDownToolPort.Size = new System.Drawing.Size(129, 21);
-            this.txtDownToolPort.TabIndex = 8;
-            this.txtDownToolPort.Text = global::AnimeSubscribeClient.Properties.Settings.Default.DownPort;
-            // 
-            // txtDownToolHost
-            // 
-            this.txtDownToolHost.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "DownHost", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtDownToolHost.Location = new System.Drawing.Point(65, 55);
-            this.txtDownToolHost.Name = "txtDownToolHost";
-            this.txtDownToolHost.Size = new System.Drawing.Size(129, 21);
-            this.txtDownToolHost.TabIndex = 7;
-            this.txtDownToolHost.Text = global::AnimeSubscribeClient.Properties.Settings.Default.DownHost;
-            // 
-            // txtServerToken
-            // 
-            this.txtServerToken.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "Token", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtServerToken.Location = new System.Drawing.Point(53, 65);
-            this.txtServerToken.Name = "txtServerToken";
-            this.txtServerToken.PasswordChar = '*';
-            this.txtServerToken.Size = new System.Drawing.Size(141, 21);
-            this.txtServerToken.TabIndex = 4;
-            this.txtServerToken.Text = global::AnimeSubscribeClient.Properties.Settings.Default.Token;
-            // 
-            // txtServerAddress
-            // 
-            this.txtServerAddress.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "ServerAddress", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtServerAddress.Location = new System.Drawing.Point(53, 26);
-            this.txtServerAddress.Name = "txtServerAddress";
-            this.txtServerAddress.Size = new System.Drawing.Size(141, 21);
-            this.txtServerAddress.TabIndex = 2;
-            this.txtServerAddress.Text = global::AnimeSubscribeClient.Properties.Settings.Default.ServerAddress;
-            // 
             // notifyIcon1
             // 
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
@@ -270,19 +271,19 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(145, 48);
             // 
-            // mQuit
-            // 
-            this.mQuit.Name = "mQuit";
-            this.mQuit.Size = new System.Drawing.Size(144, 22);
-            this.mQuit.Text = "退出(&q)";
-            this.mQuit.Click += new System.EventHandler(this.mQuit_Click);
-            // 
             // mShowOrHide
             // 
             this.mShowOrHide.Name = "mShowOrHide";
             this.mShowOrHide.Size = new System.Drawing.Size(144, 22);
             this.mShowOrHide.Text = "显示/隐藏(&h)";
             this.mShowOrHide.Click += new System.EventHandler(this.mShowOrHide_Click);
+            // 
+            // mQuit
+            // 
+            this.mQuit.Name = "mQuit";
+            this.mQuit.Size = new System.Drawing.Size(144, 22);
+            this.mQuit.Text = "退出(&q)";
+            this.mQuit.Click += new System.EventHandler(this.mQuit_Click);
             // 
             // btnStop
             // 
@@ -304,12 +305,24 @@
             this.lbStatus.TabIndex = 4;
             this.lbStatus.Text = "已停止";
             // 
+            // chkStartup
+            // 
+            this.chkStartup.AutoSize = true;
+            this.chkStartup.Location = new System.Drawing.Point(140, 411);
+            this.chkStartup.Name = "chkStartup";
+            this.chkStartup.Size = new System.Drawing.Size(72, 16);
+            this.chkStartup.TabIndex = 5;
+            this.chkStartup.Text = "开机启动";
+            this.chkStartup.UseVisualStyleBackColor = true;
+            this.chkStartup.CheckedChanged += new System.EventHandler(this.chkStartup_CheckedChanged);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(225, 403);
+            this.ClientSize = new System.Drawing.Size(225, 439);
+            this.Controls.Add(this.chkStartup);
             this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.groupBox2);
@@ -364,6 +377,7 @@
         private System.Windows.Forms.ToolStripMenuItem mShowOrHide;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Label lbStatus;
+        private System.Windows.Forms.CheckBox chkStartup;
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using AnimeSubscribeClient.plugins;
 using AnimeSubscribeClient.Properties;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +31,7 @@ namespace AnimeSubscribeClient
         public void Init()
         {
             cbDownTool.SelectedIndex = 0;
+            chkStartup.Checked = CheckStartup();
 
             this.Visible = false;
             this.ShowInTaskbar = false;
@@ -177,6 +179,64 @@ namespace AnimeSubscribeClient
                 this.notifyIcon1.ShowBalloonTip(3000, title, message, iconType);
             };
             this.Invoke(inv);
+        }
+
+        private void chkStartup_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkStartup.Checked == true)
+            {
+                string starupPath = Application.ExecutablePath;
+                RegistryKey loca = Registry.CurrentUser;
+                RegistryKey run = loca.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+
+                try
+                {
+                    run.SetValue("AnimeSubscribeClient", "\"" + starupPath + "\"");
+                    loca.Close();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    this.ShowNotification(System.Windows.Forms.ToolTipIcon.Error, " 新番订阅", ex.Message);
+                }
+            }
+            else
+            {
+                string starupPath = Application.ExecutablePath;
+                RegistryKey loca = Registry.CurrentUser;
+                RegistryKey run = loca.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+
+                try
+                {
+                    //SetValue:存储值的名称
+                    run.DeleteValue("AnimeSubscribeClient");
+                    loca.Close();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    this.ShowNotification(System.Windows.Forms.ToolTipIcon.Error, " 新番订阅", ex.Message);
+                }
+            }
+        }
+
+        private bool CheckStartup()
+        {
+            RegistryKey loca = Registry.CurrentUser;
+            RegistryKey run = loca.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", false);
+
+            try
+            {
+                var result = run.GetValue("AnimeSubscribeClient") != null;
+                loca.Close();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                this.ShowNotification(System.Windows.Forms.ToolTipIcon.Error, " 新番订阅", ex.Message);
+                return false;
+            }
         }
     }
 }
