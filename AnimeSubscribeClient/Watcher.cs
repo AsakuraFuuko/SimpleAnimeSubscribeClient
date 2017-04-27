@@ -22,6 +22,7 @@ namespace AnimeSubscribeClient
 
         private DownloadTool _tool;
         private string _path;
+        private Form1 _form;
 
         public string Host { get; set; }
         public string Token { get; set; }
@@ -30,15 +31,23 @@ namespace AnimeSubscribeClient
 
         public bool IsRunuing = false;
 
-        public Watcher(string host, string token, string path, DownloadTool tool)
+        public Watcher(string host, string token, string path, DownloadTool tool, Form1 form)
         {
             this.Host = host;
             this.Token = token;
             this._tool = tool;
             this._path = path;
+            this._form = form;
 
             _httpClientHandler = new HttpClientHandler();
-            _httpClient = new HttpClient(_httpClientHandler) { BaseAddress = new Uri(String.Format("http://{0}", this.Host)) };
+            try
+            {
+                _httpClient = new HttpClient(_httpClientHandler) { BaseAddress = new Uri(String.Format("http://{0}", this.Host)) };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             _thread = new Thread(CheckThread);
             _mre = new ManualResetEvent(false);
@@ -93,10 +102,12 @@ namespace AnimeSubscribeClient
         {
             while (IsRunuing)
             {
-                var episodes = FetchEpisodes().Result;
-                foreach (var episode in episodes)
+                try
                 {
-                    try
+                    var episodes = FetchEpisodes().Result;
+                    Logger.Info(String.Format("发现{0}个新动画", episodes.Count));
+
+                    foreach (var episode in episodes)
                     {
                         var res = _tool.AddTorrentByUrl(episode.Torrent, Path.Combine(_path, episode.Name), episode.Name).Result;
                         if (res)
@@ -105,13 +116,15 @@ namespace AnimeSubscribeClient
                         }
                         else
                         {
+                            Logger.Info("添加下载失败");
                         }
-                        Console.WriteLine(episode.Title);
+                        Logger.Info(episode.Title);
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    this._form.ShowNotification(System.Windows.Forms.ToolTipIcon.Error, " 新番订阅", ex.Message);
                 }
                 _mre.WaitOne(LoopTime);
             }
@@ -120,13 +133,22 @@ namespace AnimeSubscribeClient
         public void Start()
         {
             IsRunuing = true;
-            _thread.Start();
+            try
+            {
+                _thread.Start();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            Logger.Info("任务开始...");
         }
 
         public void Stop()
         {
             IsRunuing = false;
             _mre.Set();
+            Logger.Info("任务结束...");
         }
     }
 }

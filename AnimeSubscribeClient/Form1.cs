@@ -37,11 +37,19 @@ namespace AnimeSubscribeClient
 
         public void InitOther()
         {
-            if (tool == null)
+            try
             {
-                tool = new QBittorrent(Settings.Default.DownHost, int.Parse(Settings.Default.DownPort), Settings.Default.DownUser, Settings.Default.DownPass);
+                if (tool == null)
+                {
+                    tool = new QBittorrent(Settings.Default.DownHost, int.Parse(Settings.Default.DownPort), Settings.Default.DownUser, Settings.Default.DownPass);
+                }
+                watcher = new Watcher(Settings.Default.ServerAddress, Settings.Default.Token, Settings.Default.DownPath, tool, this);
             }
-            watcher = new Watcher(Settings.Default.ServerAddress, Settings.Default.Token, Settings.Default.DownPath, tool);
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                this.ShowNotification(System.Windows.Forms.ToolTipIcon.Error, " 新番订阅", ex.Message);
+            }
         }
 
         private void btnBrowserDownloadPath_Click(object sender, EventArgs e)
@@ -62,7 +70,15 @@ namespace AnimeSubscribeClient
             {
                 this.Hide();
                 InitOther();
-                watcher.Start();
+                try
+                {
+                    watcher.Start();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                    this.ShowNotification(System.Windows.Forms.ToolTipIcon.Error, " 新番订阅", ex.Message);
+                }
                 SetStatus();
             }
         }
@@ -89,7 +105,16 @@ namespace AnimeSubscribeClient
             Settings.Default.Save();
 
             InitOther();
-            watcher.Start();
+            try
+            {
+                watcher.Start();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                this.ShowNotification(System.Windows.Forms.ToolTipIcon.Error, " 新番订阅", ex.Message);
+            }
+
             SetStatus();
         }
 
@@ -143,6 +168,15 @@ namespace AnimeSubscribeClient
             {
                 this.Hide();
             }
+        }
+
+        public void ShowNotification(ToolTipIcon iconType, string title, string message)
+        {
+            MethodInvoker inv = delegate
+            {
+                this.notifyIcon1.ShowBalloonTip(3000, title, message, iconType);
+            };
+            this.Invoke(inv);
         }
     }
 }

@@ -26,7 +26,14 @@ namespace AnimeSubscribeClient.plugins
             this.Pass = pass;
 
             _httpClientHandler = new HttpClientHandler();
-            _httpClient = new HttpClient(_httpClientHandler) { BaseAddress = new Uri(String.Format("http://{0}:{1}", this.Host, this.Port)) };
+            try
+            {
+                _httpClient = new HttpClient(_httpClientHandler) { BaseAddress = new Uri(String.Format("http://{0}:{1}", this.Host, this.Port)) };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         protected abstract bool IsAuthenticated();
