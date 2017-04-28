@@ -109,6 +109,7 @@ namespace AnimeSubscribeClient
 
                     foreach (var episode in episodes)
                     {
+                        Logger.Info(episode.Title);
                         var res = _tool.AddTorrentByUrl(episode.Torrent, Path.Combine(_path, episode.Name), episode.Name).Result;
                         if (res)
                         {
@@ -118,7 +119,6 @@ namespace AnimeSubscribeClient
                         {
                             Logger.Info("添加下载失败");
                         }
-                        Logger.Info(episode.Title);
                     }
                 }
                 catch (Exception ex)

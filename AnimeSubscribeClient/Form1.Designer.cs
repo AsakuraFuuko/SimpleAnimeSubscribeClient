@@ -80,7 +80,6 @@
             this.txtServerToken.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "Token", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtServerToken.Location = new System.Drawing.Point(53, 65);
             this.txtServerToken.Name = "txtServerToken";
-            this.txtServerToken.PasswordChar = '*';
             this.txtServerToken.Size = new System.Drawing.Size(141, 21);
             this.txtServerToken.TabIndex = 4;
             this.txtServerToken.Text = global::AnimeSubscribeClient.Properties.Settings.Default.Token;
@@ -176,7 +175,6 @@
             this.txtDownToolPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::AnimeSubscribeClient.Properties.Settings.Default, "DownPass", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtDownToolPass.Location = new System.Drawing.Point(65, 163);
             this.txtDownToolPass.Name = "txtDownToolPass";
-            this.txtDownToolPass.PasswordChar = '*';
             this.txtDownToolPass.Size = new System.Drawing.Size(129, 21);
             this.txtDownToolPass.TabIndex = 10;
             this.txtDownToolPass.Text = global::AnimeSubscribeClient.Properties.Settings.Default.DownPass;
