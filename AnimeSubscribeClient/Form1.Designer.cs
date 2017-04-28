@@ -299,7 +299,7 @@
             // lbStatus
             // 
             this.lbStatus.AutoSize = true;
-            this.lbStatus.Location = new System.Drawing.Point(165, 373);
+            this.lbStatus.Location = new System.Drawing.Point(156, 373);
             this.lbStatus.Name = "lbStatus";
             this.lbStatus.Size = new System.Drawing.Size(41, 12);
             this.lbStatus.TabIndex = 4;

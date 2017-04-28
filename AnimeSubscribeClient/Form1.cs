@@ -127,6 +127,15 @@ namespace AnimeSubscribeClient
                 var status = watcher.IsRunuing;
                 this.btnStart.Enabled = !status;
                 this.btnStop.Enabled = status;
+                this.txtServerAddress.Enabled = !status;
+                this.txtServerToken.Enabled = !status;
+                this.txtDownToolHost.Enabled = !status;
+                this.txtDownToolPort.Enabled = !status;
+                this.txtDownToolUser.Enabled = !status;
+                this.txtDownToolPass.Enabled = !status;
+                this.txtDownToolPath.Enabled = !status;
+                this.btnBrowserDownloadPath.Enabled = !status;
+                this.cbDownTool.Enabled = !status;
                 this.lbStatus.Text = status ? "运行中" : "已停止";
                 this.notifyIcon1.Text = "新番订阅(" + (status ? "运行中" : "已停止") + ")";
             }
