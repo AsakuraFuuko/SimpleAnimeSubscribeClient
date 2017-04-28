@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AnimeSubscribeClient
 {
@@ -17,7 +18,7 @@ namespace AnimeSubscribeClient
         {
             lock (SpinLock)
             {
-                using (StreamWriter sw = new StreamWriter(Path.Combine(Environment.CurrentDirectory, infoFile), true))
+                using (StreamWriter sw = new StreamWriter(Path.Combine(Application.StartupPath, infoFile), true))
                 {
                     sw.WriteLine(String.Format("[{0}] {1}", DateTime.Now.ToString("yy-MM-dd HH:mm:ss"), msg));
                 }
@@ -28,7 +29,7 @@ namespace AnimeSubscribeClient
         {
             lock (SpinLock)
             {
-                using (StreamWriter sw = new StreamWriter(Path.Combine(Environment.CurrentDirectory, errorFile), true))
+                using (StreamWriter sw = new StreamWriter(Path.Combine(Application.StartupPath, errorFile), true))
                 {
                     sw.WriteLine(String.Format("[{0}] {1}", DateTime.Now.ToString("yy-MM-dd HH:mm:ss"), msg));
                 }

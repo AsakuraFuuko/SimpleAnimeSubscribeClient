@@ -208,7 +208,6 @@ namespace AnimeSubscribeClient
 
                 try
                 {
-                    //SetValue:存储值的名称
                     run.DeleteValue("AnimeSubscribeClient");
                     loca.Close();
                 }
