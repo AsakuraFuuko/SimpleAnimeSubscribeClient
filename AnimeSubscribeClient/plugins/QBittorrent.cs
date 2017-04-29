@@ -53,7 +53,10 @@ namespace AnimeSubscribeClient.plugins
 
         protected override bool IsAuthenticated()
         {
-            return _httpClientHandler.CookieContainer.GetCookies(_httpClient.BaseAddress)["SID"] != null;
+            var uri = new Uri("/query/transferInfo", UriKind.Relative);
+            var httpResponseMessage = _httpClient.GetAsync(uri).Result;
+
+            return httpResponseMessage.IsSuccessStatusCode;
         }
     }
 }
