@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Security;
+using System.Net.Http.Headers;
 
 namespace AnimeSubscribeClient.plugins
 {
@@ -23,7 +24,8 @@ namespace AnimeSubscribeClient.plugins
             });
 
             var uri = new Uri("/login", UriKind.Relative);
-            await _httpClient.PostAsync(uri, bodyContent);
+            _httpClient.DefaultRequestHeaders.Referrer = _httpClient.BaseAddress;
+            var httpResponseMessage = await _httpClient.PostAsync(uri, bodyContent);
             return IsAuthenticated();
         }
 
@@ -53,6 +55,8 @@ namespace AnimeSubscribeClient.plugins
 
         protected override bool IsAuthenticated()
         {
+            //var headers = X-Request:JSON
+            //X - Requested - With:XMLHttpRequest
             var uri = new Uri("/query/transferInfo", UriKind.Relative);
             var httpResponseMessage = _httpClient.GetAsync(uri).Result;
 
