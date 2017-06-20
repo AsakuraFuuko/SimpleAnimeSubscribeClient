@@ -27,6 +27,7 @@ namespace AnimeSubscribeClient
         public string Host { get; set; }
         public string Token { get; set; }
 
+        public int DefaultLoopTime = 60 * 60 * 1000;
         public int LoopTime = 60 * 60 * 1000;
 
         public bool IsRunuing = false;
@@ -42,7 +43,7 @@ namespace AnimeSubscribeClient
             _httpClientHandler = new HttpClientHandler();
             try
             {
-                _httpClient = new HttpClient(_httpClientHandler) { BaseAddress = new Uri(String.Format("http://{0}", this.Host)) };
+                _httpClient = new HttpClient(_httpClientHandler) { BaseAddress = new Uri(this.Host.StartsWith("http") ? this.Host : String.Format("http://{0}", this.Host)) };
             }
             catch (Exception)
             {
@@ -120,13 +121,22 @@ namespace AnimeSubscribeClient
                             Logger.Info("添加下载失败");
                         }
                     }
+                    LoopTime = DefaultLoopTime;
                 }
                 catch (Exception ex)
                 {
                     Logger.Error(ex);
-                    this._form.ShowNotification(System.Windows.Forms.ToolTipIcon.Error, " 新番订阅", ex.Message);
+                    if (LoopTime == DefaultLoopTime)
+                    {
+                        LoopTime = 10 * 1000;
+                    }
+                    else
+                    {
+                        LoopTime *= 2;
+                    }
+                    this._form.ShowNotification(System.Windows.Forms.ToolTipIcon.Error, " 新番订阅", string.Format("发生错误，{0}秒后重试", LoopTime / 1000));
                 }
-                _mre.WaitOne(LoopTime);
+                _mre.WaitOne(Math.Min(LoopTime, DefaultLoopTime));
             }
         }
 

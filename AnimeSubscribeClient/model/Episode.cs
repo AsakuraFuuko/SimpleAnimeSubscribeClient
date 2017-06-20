@@ -9,7 +9,7 @@ namespace AnimeSubscribeClient.model
 {
     public class Episode
     {
-        [JsonProperty(PropertyName = "_id")]
+        [JsonProperty(PropertyName = "id")]
         public string ID { get; set; }
 
         public string Name { get; set; }
