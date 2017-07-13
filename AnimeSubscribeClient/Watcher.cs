@@ -99,7 +99,33 @@ namespace AnimeSubscribeClient
             }
         }
 
-        private void CheckThread()
+        private async Task<int> LastUpdateTime()
+        {
+            var stringBuilder = new StringBuilder();
+
+            var uriDownload = new Uri(String.Format("/lastupdate"), UriKind.Relative);
+            try
+            {
+                var res = await _httpClient.GetAsync(uriDownload);
+                var jsonStr = await res.Content.ReadAsStringAsync();
+
+                var jsonObj = JsonConvert.DeserializeObject<LastUpdate>(jsonStr);
+
+                if (jsonObj.Status)
+                {
+                    DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+                    return (int)((DateTime.Now - startTime).TotalMilliseconds - jsonObj.LastUpdateTime);
+                }
+
+                return DefaultLoopTime;
+            }
+            catch (Exception)
+            {
+                return DefaultLoopTime;
+            }
+        }
+
+        private async void CheckThread()
         {
             while (IsRunuing)
             {
@@ -121,7 +147,8 @@ namespace AnimeSubscribeClient
                             Logger.Info("添加下载失败");
                         }
                     }
-                    LoopTime = DefaultLoopTime;
+                    LoopTime = DefaultLoopTime - await LastUpdateTime() + 5 * 60 * 1000;
+                    Logger.Info(string.Format("下次更新时间是：{0}", DateTime.Now.AddMilliseconds(LoopTime)));
                 }
                 catch (Exception ex)
                 {

@@ -60,6 +60,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="model\EpisodesResult.cs" />
+    <Compile Include="model\LastUpdate.cs" />
     <Compile Include="plugins\DownloadTool.cs" />
     <Compile Include="plugins\QBittorrent.cs" />
     <Compile Include="Program.cs" />
