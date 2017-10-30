@@ -58,7 +58,7 @@ namespace AnimeSubscribeClient
         {
             var stringBuilder = new StringBuilder();
 
-            var uriDownload = new Uri(String.Format("/episodes/{0}", this.Token), UriKind.Relative);
+            var uriDownload = new Uri(String.Format("episodes/{0}", this.Token), UriKind.Relative);
 
             try
             {
@@ -83,7 +83,7 @@ namespace AnimeSubscribeClient
         {
             var stringBuilder = new StringBuilder();
 
-            var uriDownload = new Uri(String.Format("/episode/{0}", id), UriKind.Relative);
+            var uriDownload = new Uri(String.Format("episode/{0}", id), UriKind.Relative);
             try
             {
                 var res = await _httpClient.DeleteAsync(uriDownload);
@@ -103,7 +103,7 @@ namespace AnimeSubscribeClient
         {
             var stringBuilder = new StringBuilder();
 
-            var uriDownload = new Uri(String.Format("/lastupdate"), UriKind.Relative);
+            var uriDownload = new Uri(String.Format("lastupdate"), UriKind.Relative);
             try
             {
                 var res = await _httpClient.GetAsync(uriDownload);
@@ -131,23 +131,23 @@ namespace AnimeSubscribeClient
             {
                 try
                 {
-                    var episodes = FetchEpisodes().Result;
+                    var episodes = await FetchEpisodes();
                     Logger.Info(String.Format("发现{0}个新动画", episodes.Count));
 
                     foreach (var episode in episodes)
                     {
                         Logger.Info(episode.Title);
-                        var res = _tool.AddTorrentByUrl(episode.Torrent, Path.Combine(_path, episode.Name), episode.Name).Result;
+                        var res = await _tool.AddTorrentByUrl(episode.Torrent, Path.Combine(_path, episode.Name), episode.Name);
                         if (res)
                         {
-                            var a = DeleteEpisode(episode.ID).Result;
+                            var a = await DeleteEpisode(episode.ID);
                         }
                         else
                         {
                             Logger.Info("添加下载失败");
                         }
                     }
-                    LoopTime = DefaultLoopTime - await LastUpdateTime() + 5 * 60 * 1000;
+                    LoopTime = Math.Abs(DefaultLoopTime - await LastUpdateTime() + 5 * 60 * 1000);
                     Logger.Info(string.Format("下次更新时间是：{0}", DateTime.Now.AddMilliseconds(LoopTime)));
                 }
                 catch (Exception ex)
