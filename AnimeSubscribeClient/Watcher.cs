@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -43,6 +44,9 @@ namespace AnimeSubscribeClient
             _httpClientHandler = new HttpClientHandler();
             try
             {
+                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 _httpClient = new HttpClient(_httpClientHandler) { BaseAddress = new Uri(this.Host.StartsWith("http") ? this.Host : String.Format("http://{0}", this.Host)) };
             }
             catch (Exception)
