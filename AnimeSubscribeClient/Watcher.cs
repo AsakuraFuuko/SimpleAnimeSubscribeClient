@@ -28,8 +28,8 @@ namespace AnimeSubscribeClient
         public string Host { get; set; }
         public string Token { get; set; }
 
-        public int DefaultLoopTime = 60 * 60 * 1000;
-        public int LoopTime = 60 * 60 * 1000;
+        public long DefaultLoopTime = 60 * 60 * 1000;
+        public long LoopTime = 60 * 60 * 1000;
 
         public bool IsRunuing = false;
 
@@ -103,7 +103,7 @@ namespace AnimeSubscribeClient
             }
         }
 
-        private async Task<int> LastUpdateTime()
+        private async Task<long> LastUpdateTime()
         {
             var stringBuilder = new StringBuilder();
 
@@ -165,9 +165,10 @@ namespace AnimeSubscribeClient
                     {
                         LoopTime *= 2;
                     }
+					LoopTime = Math.Min(LoopTime, int.MaxValue);
                     this._form.ShowNotification(System.Windows.Forms.ToolTipIcon.Error, " 新番订阅", string.Format("发生错误，{0}秒后重试", LoopTime / 1000));
                 }
-                _mre.WaitOne(Math.Min(LoopTime, DefaultLoopTime));
+				_mre.WaitOne((int)Math.Min(LoopTime, DefaultLoopTime));
             }
         }
 
